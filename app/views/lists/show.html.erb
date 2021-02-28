@@ -1,0 +1,12 @@
+<h1>List: <%= @List.name%></h1>
+
+<p>Created on: <%= @List.date_created%></p>
+
+<p>Notes: <%= @List.notes%></p>
+
+<% if display_edit_delete_link %>
+<%= link_to("Edit list", edit_user_list_path(@user, @list)) %><br><br>
+
+<%= link_to "delete", [@user, @list], method: :delete,
+                                  data: { confirm: "Are you sure?" } %>
+<%end%>
