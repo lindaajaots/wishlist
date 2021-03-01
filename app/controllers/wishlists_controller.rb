@@ -1,25 +1,20 @@
 class WishlistsController < ApplicationController
   before_action :set_wishlist, only: %i[ show edit update destroy ]
 
-  # GET /wishlists or /wishlists.json
   def index
     @wishlists = Wishlist.all
   end
 
-  # GET /wishlists/1 or /wishlists/1.json
   def show
   end
 
-  # GET /wishlists/new
   def new
     @wishlist = Wishlist.new
   end
 
-  # GET /wishlists/1/edit
   def edit
   end
 
-  # POST /wishlists or /wishlists.json
   def create
     @wishlist = Wishlist.new(wishlist_params)
 
@@ -32,7 +27,6 @@ class WishlistsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /wishlists/1 or /wishlists/1.json
   def update
     respond_to do |format|
       if @wishlist.update(wishlist_params)
@@ -43,7 +37,6 @@ class WishlistsController < ApplicationController
     end
   end
 
-  # DELETE /wishlists/1 or /wishlists/1.json
   def destroy
     @wishlist.destroy
     respond_to do |format|
@@ -53,12 +46,11 @@ class WishlistsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_wishlist
       @wishlist = Wishlist.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def wishlist_params
       params.require(:wishlist).permit(:item)
     end
