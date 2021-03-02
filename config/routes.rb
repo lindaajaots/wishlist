@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
-  resources :wishlists
+
+  get 'login' => 'sessions#new'
+  post 'login' => 'sessions#create'
+  get 'signup' => 'sessions#new'
+  delete 'logout' => 'sessions#destroy'
+  get 'logout' => 'sessions#destroy'
+  get 'authorized' => 'sessions#page_requires_login'
+  root 'users#index'
+
   resources :users
-  devise_for :users, path: '', path_names: {sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
-  root 'application#hello'
+  resources :wishlists
+  resources :sessions
+
 end
