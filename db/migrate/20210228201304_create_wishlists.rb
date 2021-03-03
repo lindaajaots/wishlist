@@ -1,7 +1,7 @@
 class CreateWishlists < ActiveRecord::Migration[6.1]
   def change
     create_table :wishlists do |t|
-      t.string :item
+      t.string :name
 
       t.timestamps
     end
