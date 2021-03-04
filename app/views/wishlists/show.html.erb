@@ -3,13 +3,18 @@
 <p> Here are your things :</p>
 
 <table>
+  <thead>
+    <tr>
+      <th>Thing name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
 
 <tbody>
   <% @wishlist.things.each do |thing| %>
     <tr>
       <td><%= thing.name %></td>
-      <td><%= link_to 'Show', thing %></td>
-      <td><%= link_to 'Edit', edit_thing_path(wishlist) %></td>
+      <td><%= link_to 'Edit', edit_thing_path(:wishlist_id) %></td>
       <td><%= link_to 'Destroy', thing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>

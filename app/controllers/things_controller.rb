@@ -1,8 +1,7 @@
 class ThingsController < ApplicationController
 
 def index
-  @wishlist = Wishlist.find_by_id(params[:wishlist_id])
-  @things = @wishlist.things
+  params.require(:thing).permit(:name, :id, :wishlist_id)
 end
 
 def new
@@ -15,7 +14,7 @@ def create
   puts "leibjasai"
   @thing = Thing.create(thing_params)
   if @thing.save
-    redirect_to wishlist_path(params[:wishlist_id])
+    redirect_to wishlists_path(params[:wishlist_id])
   else
     render 'new'
   end
@@ -39,7 +38,7 @@ def update
 end
 
 def destroy
-  Thing.find(params[:id]).destroy
+  Thing.find_by(id: params[:id]).destroy
   flash[:success] = "This thing is deleted"
   redirect_to things_path
 end

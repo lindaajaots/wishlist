@@ -1,7 +1,11 @@
-<%= form_for([thing]) do |f| %>
+<%= form_for @thing do |f| %>
+  <%= f.hidden_field :wishlist_id %>
+
   <p>
     <%= f.label :name %>
-    <%= f.text_field :name %><br>
+    <%= f.text_field :name %>
+
+    <br>
   </p>
 
     <%= f.submit %>
