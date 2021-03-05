@@ -6,7 +6,6 @@ end
 
 def new
   @thing = Thing.new(wishlist_id:params[:wishlist_id])
-  puts @thing
 end
 
 def create
@@ -18,17 +17,14 @@ def create
     render 'new'
   end
 end
+end
 
 def show
   @thing = Thing.find_by(id: params[:id])
-  puts @thing
-  puts "reede"
 end
 
 def edit
   @thing = Thing.find(params[:id])
-  puts @thing
-  puts "reede"
 end
 
 def update
@@ -39,15 +35,11 @@ def update
     render 'edit'
   end
 end
-end
 
 def destroy
-  @Thing = Thing.find(params[:id])
-  @Thing.destroy
-
-  respond_to do |format|
-    format.html { redirect_to wishlists_path(:wishlist_id), notice: "Thing was successfully deleted." }
-  end
+  Thing.find(params[:id]).destroy
+  flash[:success] = "Thing was successfully deleted."
+    redirect_to wishlists_path(:wishlist_id)
 end
 
 private
