@@ -10,11 +10,10 @@ def new
 end
 
 def create
-  puts thing_params
-  puts "leibjasai"
   @thing = Thing.create(thing_params)
+  respond_to do |format|
   if @thing.save
-    redirect_to wishlists_path(params[:wishlist_id])
+    format.html { redirect_to wishlists_path(wishlist_id:params[:wishlist_id]), notice: "New thing was successfully created." }
   else
     render 'new'
   end
@@ -22,25 +21,33 @@ end
 
 def show
   @thing = Thing.find_by(id: params[:id])
+  puts @thing
+  puts "reede"
 end
 
 def edit
-  @thing = Thing.find_by(id: params[:id])
+  @thing = Thing.find(params[:id])
+  puts @thing
+  puts "reede"
 end
 
 def update
   @thing = Thing.find_by(id: params[:id])
   if @thing.update(thing_params)
-    redirect_to things_path
+    redirect_to wishlists_path(params[:wishlist_id])
   else
     render 'edit'
   end
 end
+end
 
 def destroy
-  Thing.find_by(id: params[:id]).destroy
-  flash[:success] = "This thing is deleted"
-  redirect_to things_path
+  @Thing = Thing.find(params[:id])
+  @Thing.destroy
+
+  respond_to do |format|
+    format.html { redirect_to wishlists_path(:wishlist_id), notice: "Thing was successfully deleted." }
+  end
 end
 
 private

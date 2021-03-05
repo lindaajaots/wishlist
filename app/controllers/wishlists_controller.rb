@@ -37,9 +37,7 @@ end
   end
 
   def destroy
-    @wishlist = Wishlist.find(params[:id])
-    @wishlist.destroy
-
+    Wishlist.find(params[:id]).destroy
     flash[:success] = "Wishlist deleted"
     redirect_to wishlists_path
   end

@@ -4,16 +4,22 @@
     <title>WishlistPortfolio</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+      <header>
+        <h1>Wishlists</h1>
+  <nav>
+    <a href="/sign_in">Sign in</a>
+    <a href="/sign_up">Sign up</a>
+    <a href="/sign_out">Sign out</a>
+  </nav>
+  <h2><%= flash[:notice] %>
+      </header>
 
-    <%= yield %>
-  </body>
-</html>
+      <%= yield %>
+    </body>
+  </html>

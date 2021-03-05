@@ -1,10 +1,10 @@
-<%= form_for @thing do |f| %>
+<%= form_for thing do |f| %>
   <%= f.hidden_field :wishlist_id %>
 
   <p>
     <%= f.label :name %>
     <%= f.text_field :name %>
-
+      <%= f.hidden_field :id %>
     <br>
   </p>
 

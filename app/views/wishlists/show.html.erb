@@ -14,7 +14,7 @@
   <% @wishlist.things.each do |thing| %>
     <tr>
       <td><%= thing.name %></td>
-      <td><%= link_to 'Edit', edit_thing_path(:wishlist_id) %></td>
+      <td><%= link_to 'Edit', edit_thing_path(thing.id) %></td>
       <td><%= link_to 'Destroy', thing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
@@ -23,7 +23,6 @@
 
 <br>
 
-<%= link_to 'New', new_thing_path %>
-<%= link_to 'Edit', edit_wishlist_path %>
+<%= link_to 'Add things', new_thing_path(wishlist_id:params[:id]) %>
+<%= link_to 'New wishlist', new_wishlist_path %>
 <%= link_to 'Back', wishlists_path %>
-<%= link_to 'Create', new_thing_path(wishlist_id:params[:id]) %>

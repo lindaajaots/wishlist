@@ -2,4 +2,4 @@
 
 <%= render partial: "form", locals: {thing: @thing} %>
 
-<%= link_to 'Back', wishlist_path(params[:wishlist_id]) %>
+<%= link_to 'Back', wishlists_path(wishlist_id:params[:id]) %>

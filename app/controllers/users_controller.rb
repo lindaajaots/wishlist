@@ -1,40 +1,50 @@
 class UsersController < ApplicationController
 
-  def index
+  def sign_up
     @users = User.all
   end
 
-  def show
-    @user = User.find(params[:id])
+  def sign_up!
+    user = User.new(
+          name: params[:name],
+          password_digest: params[:password]
+        )
+        if params[:password_confirmation] != params[:password]
+          message = "Your passwords don't match!"
+        elsif user.save
+          message = "Your account has been created!"
+        else
+          message = "Your account couldn't be created. Did you enter a unique username and password?"
+        end
+        puts message
+        redirect_to action: :sign_up
+      flash[:notice] = message
   end
 
-  def new
-    @user = User.new
+  def sign_in
   end
 
-  def edit
-  end
-
-  def create
-    @user = User.new(user_params)
-    if @user.save
-      log_in @user
-      flash[:success] = "Welcome to the Wishlist"
-      redirect_to @user
+  def sign_in!
+    user = User.find_by(name: params[:name])
+    if !@user
+      message = "This user doesn't exist!"
+    elsif @user.password_digest != params[:password]
+      message = "Your password's wrong!"
     else
-      render 'new'
+      message = "You're signed in, #{@user.name}!"
     end
+    puts message
+    redirect_to action: :sign_in
+      flash[:notice] = message
   end
 
-  def destroy
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: "User was deleted." }
-    end
+  def sign_out
+    puts "You're signed out!"
+    redirect_to root_url
+      flash[:notice] = message
   end
-
-private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.fetch(:user, {}).permit(:name, :email, :password, :password_confirmation)
   end
+end
